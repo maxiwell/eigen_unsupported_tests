@@ -56,6 +56,8 @@ void testGeneral(const MatrixType& m, const typename MatrixType::RealScalar& tol
 
         m4 = mpow(x+y);
         m5.noalias() = m2 * m3;
+        std::cout << "x: " << x << std::endl;
+        std::cout << "y: " << y << std::endl;
         std::cout << "m4: " << m4 << std::endl;
         std::cout << "m5: " << m5 << std::endl;
         std::cout << "tol: " << tol << std::endl;

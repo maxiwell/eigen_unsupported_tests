@@ -49,6 +49,8 @@ void testGeneral(const MatrixType& m, const typename MatrixType::RealScalar& tol
         generateTestMatrix<MatrixType>::run(m1, m.rows());
         MatrixPower<MatrixType> mpow(m1);
 
+        std::cout << "m1: " << m1 << std::endl;
+
         x = internal::random<RealScalar>();
         y = internal::random<RealScalar>();
         m2 = mpow(x);

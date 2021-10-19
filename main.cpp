@@ -13,7 +13,9 @@ void mySchurMatrix(const MatrixType& m)
 
     RealSchur<MatrixType> schur(result);
     MatrixType T = schur.matrixT();
+    std::cout << "T: " << std::endl << T << std::endl;
     MatrixType U = schur.matrixU();
+    std::cout << "U: " << std::endl << U << std::endl;
 
     const Index size = result.cols();
 
@@ -35,7 +37,7 @@ int main()
     unsigned int seed;
 
     //  ppc64le and x86 print the same values
-    //  ('result' and 'schur' matrix are equal)
+    //  ('random' and 'schur' matrix are equal)
     seed = 1633528798;
     srand(seed);
     std::cout << "Seed: " << seed << std::endl;
@@ -43,7 +45,7 @@ int main()
     std::cout << std::endl;
 
     //  ppc64le and x86 print different values
-    //  ('result' is equal, but 'schur' is different)
+    //  ('random' is equal, but 'schur' is different)
     seed = 1633528802;
     srand(seed);
     std::cout << "Seed: " << seed << std::endl;
@@ -51,7 +53,7 @@ int main()
     std::cout << std::endl;
 
     //  ppc64le and x86 print different values
-    //  ('result' is equal, but 'schur' has only -nan on ppc64le)
+    //  ('random' is equal, but 'schur' has only -nan on ppc64le)
     seed = 1633528806;
     srand(seed);
     std::cout << "Seed: " << seed << std::endl;

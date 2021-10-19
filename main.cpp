@@ -42,7 +42,7 @@ void testGeneral(const MatrixType& m, const typename MatrixType::RealScalar& tol
     MatrixType m1, m2, m3, m4, m5;
     RealScalar x, y;
 
-    int iter = 1;
+    int iter = 10;
 
     for (int i=0; i < iter; ++i) {
         std::cout << "iter " << i << std::endl;
@@ -66,15 +66,15 @@ void testGeneral(const MatrixType& m, const typename MatrixType::RealScalar& tol
         std::cout << m4.isApprox(m5, tol) << std::endl;
         //VERIFY(m4.isApprox(m5, tol));
 
-        //m4 = mpow(x*y);
-        //m5 = m2.pow(y);
-        //std::cout << m4.isApprox(m5, tol) << std::endl;
-        ////VERIFY(m4.isApprox(m5, tol));
+        m4 = mpow(x*y);
+        m5 = m2.pow(y);
+        std::cout << m4.isApprox(m5, tol) << std::endl;
+        //VERIFY(m4.isApprox(m5, tol));
 
-        //m4 = (std::abs(x) * m1).pow(y);
-        //m5 = std::pow(std::abs(x), y) * m3;
-        //std::cout << m4.isApprox(m5, tol) << std::endl;
-        ////VERIFY(m4.isApprox(m5, tol));
+        m4 = (std::abs(x) * m1).pow(y);
+        m5 = std::pow(std::abs(x), y) * m3;
+        std::cout << m4.isApprox(m5, tol) << std::endl;
+        //VERIFY(m4.isApprox(m5, tol));
     }
 }
 
@@ -89,7 +89,6 @@ void generateRandomMatrix(const MatrixType& m)
     MatrixType T = schur.matrixT();
     MatrixType U = schur.matrixU();
 
-
     const Index size = result.cols();
 
     for (Index i=0; i < size; ++i) {
@@ -100,11 +99,7 @@ void generateRandomMatrix(const MatrixType& m)
     }
     MatrixType mfinal = U * T * U.transpose();
 
-    std::cout << "m: " << mfinal << std::endl;
-
-    //generateTestMatrix<MatrixType>::run(m1, m.rows());
-    //MatrixPower<MatrixType> mpow(m1);
-
+    std::cout << "mfinal: " << mfinal << std::endl;
 }
 
 typedef Matrix<long double,3,3> Matrix3e;
@@ -113,21 +108,34 @@ typedef Matrix<long double,3,3> Matrix3e;
 
 int main()
 {
-    // Iter 0, 1, 2, 3 pass
-    // Iter 4 never finish
+    // function testGeneral:
+    //  Iter 0, 1, 2, 3 pass
+    //  Iter 4 never finish
+    //
+    // function generateRandomMatrix (only one iter):
+    //  ppc64le and x86 print the same values
+    //  ('result' and 'mfinal' matrix are equal)
     unsigned int seed = 1633528798;
 
-    // Iter 0 fails
-    // Iter 1 pass
-    // Iter 2 never finish
+    // function testGeneral:
+    //  Iter 0 fails
+    //  Iter 1 pass
+    //  Iter 2 never finish
+    //
+    // function generateRandomMatrix (only one iter):
+    //  ppc64le and x86 print different values
+    //  ('result' is equal, but 'mfinal' is different)
     //unsigned int seed = 1633528802;
 
-    // Iter 0 never finish
+    // function testGeneral:
+    //  Iter 0 never finish
+    //
+    // function generateRandomMatrix (only one iter):
+    //  ppc64le and x86 print different values
+    //  ('result' is equal, but 'mfinal' has only -nan on ppc64le)
     //unsigned int seed = 1633528806;
 
     srand(seed);
-
-    printf("Matrix3e():\n");
 
     Eigen::generateRandomMatrix(Eigen::Matrix3e());
     //Eigen::testGeneral(Eigen::Matrix3e(), 1e-13L);

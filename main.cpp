@@ -78,6 +78,35 @@ void testGeneral(const MatrixType& m, const typename MatrixType::RealScalar& tol
     }
 }
 
+template<typename MatrixType>
+void generateRandomMatrix(const MatrixType& m)
+{
+    MatrixType result = MatrixType::Random(m.rows(), m.rows());
+
+    std::cout << "result: " << result << std::endl;
+
+    RealSchur<MatrixType> schur(result);
+    MatrixType T = schur.matrixT();
+    MatrixType U = schur.matrixU();
+
+
+    const Index size = result.cols();
+
+    for (Index i=0; i < size; ++i) {
+      if (i == size - 1 || T.coeff(i+1,i) == 0)
+        T.coeffRef(i,i) = std::abs(T.coeff(i,i));
+      else
+        ++i;
+    }
+    MatrixType mfinal = U * T * U.transpose();
+
+    std::cout << "m: " << mfinal << std::endl;
+
+    //generateTestMatrix<MatrixType>::run(m1, m.rows());
+    //MatrixPower<MatrixType> mpow(m1);
+
+}
+
 typedef Matrix<long double,3,3> Matrix3e;
 
 }
@@ -98,10 +127,10 @@ int main()
 
     srand(seed);
 
-    //printf("Matrix2d():\n");
-    //Eigen::testGeneral(Eigen::Matrix2d(), 1e-13);
     printf("Matrix3e():\n");
-    Eigen::testGeneral(Eigen::Matrix3e(), 1e-13L);
+
+    Eigen::generateRandomMatrix(Eigen::Matrix3e());
+    //Eigen::testGeneral(Eigen::Matrix3e(), 1e-13L);
     return 0;
 }
 

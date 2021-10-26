@@ -9,4 +9,6 @@ trace:
 	$(CXX) -fno-inline-small-functions -finstrument-functions -g -c main.cpp -I$(EIGEN)
 	$(CXX) -no-pie trace.o main.o -o main
 
+large:
+	$(CXX) $(CXXFLAGS) -fno-inline-small-functions -fno-inline-functions -g large.cpp -o large -I$(EIGEN)
 

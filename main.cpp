@@ -9,13 +9,13 @@ void mySchurMatrix(const MatrixType& m)
 {
     MatrixType result = MatrixType::Random(m.rows(), m.rows());
 
-    std::cout << "random matrix: " << std::endl << result << std::endl;
+    //std::cout << "random matrix: " << std::endl << result << std::endl;
 
     RealSchur<MatrixType> schur(result);
     MatrixType T = schur.matrixT();
     std::cout << "T: " << std::endl << T << std::endl;
     MatrixType U = schur.matrixU();
-    std::cout << "U: " << std::endl << U << std::endl;
+    //std::cout << "U: " << std::endl << U << std::endl;
 
     const Index size = result.cols();
 
@@ -27,7 +27,7 @@ void mySchurMatrix(const MatrixType& m)
     }
     MatrixType mfinal = U * T * U.transpose();
 
-    std::cout << "schur matrix: " << std::endl << mfinal << std::endl;
+    //std::cout << "schur matrix: " << std::endl << mfinal << std::endl;
 }
 
 }

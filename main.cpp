@@ -36,6 +36,16 @@ int main()
 {
     unsigned int seed;
 
+    //std::cout << "__DBL_EPSILON__:" << __DBL_EPSILON__ << std::endl;
+    //std::cout << "std::epsilon double: " << std::numeric_limits<double>::epsilon() << std::endl;
+    //std::cout << "__LDBL_EPSILON__:" << __LDBL_EPSILON__ << std::endl;
+    //std::cout << "std::epsilon long double: " << std::numeric_limits<long double>::epsilon() << std::endl;
+
+    //std::cout << "__DBL_MIN__: " << __DBL_MIN__ << std::endl;
+    //std::cout << "__LDBL_MIN__: " << __LDBL_MIN__ << std::endl;
+    //std::cout << "size: " << sizeof(double) << " min double: " << std::numeric_limits<double>::min() << std::endl;
+    //std::cout << "size: " << sizeof(long double) << " min long double: " << std::numeric_limits<long double>::min() << std::endl;
+
     //  ppc64le and x86 print the same values
     //  ('random' and 'schur' matrix are equal)
     seed = 1633528798;

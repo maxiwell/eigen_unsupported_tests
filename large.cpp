@@ -40,7 +40,7 @@ void testGeneral(const MatrixType& m, const typename MatrixType::RealScalar& tol
 {
     typedef typename MatrixType::RealScalar RealScalar;
     MatrixType m1, m2, m3, m4, m5;
-    RealScalar x, y;
+    RealScalar x, y, r;
 
     int iter = 10;
 
@@ -63,17 +63,24 @@ void testGeneral(const MatrixType& m, const typename MatrixType::RealScalar& tol
         //std::cout << "m4: " << m4 << std::endl;
         //std::cout << "m5: " << m5 << std::endl;
         //std::cout << "tol: " << tol << std::endl;
-        std::cout << m4.isApprox(m5, tol) << std::endl;
+        m4.isApprox(m5, tol);
+        r = m4.isApprox(m5, tol);
+        if (r == 0)
+            std::cout << r << std::endl;
         //VERIFY(m4.isApprox(m5, tol));
 
         m4 = mpow(x*y);
         m5 = m2.pow(y);
-        std::cout << m4.isApprox(m5, tol) << std::endl;
+        r = m4.isApprox(m5, tol);
+        if (r == 0)
+            std::cout << r << std::endl;
         //VERIFY(m4.isApprox(m5, tol));
 
         m4 = (std::abs(x) * m1).pow(y);
         m5 = std::pow(std::abs(x), y) * m3;
-        std::cout << m4.isApprox(m5, tol) << std::endl;
+        r = m4.isApprox(m5, tol);
+        if (r == 0)
+            std::cout << r << std::endl;
         //VERIFY(m4.isApprox(m5, tol));
     }
 }

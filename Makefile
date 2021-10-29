@@ -1,6 +1,8 @@
 EIGEN ?= /home/maxiwell/devel/eigen/
 CXX ?= /opt/at14.0/bin/g++
 
+.PHONY: large
+
 all:
 	$(CXX) $(CXXFLAGS) -fno-inline-small-functions -fno-inline-functions -g main.cpp -o main -I$(EIGEN)
 
